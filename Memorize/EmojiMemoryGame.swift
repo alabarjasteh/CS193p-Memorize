@@ -18,10 +18,11 @@ class EmojiMemoryGame: ObservableObject {
     }
     
     private static func createMemoryGame(with theme: Theme) -> MemoryGame<String> {
-        let size = theme.numberOfPairs ?? theme.emojies.count.random(startingFrom: 2)
+        let size = theme.numberOfPairs// ?? theme.emojies.count.random(startingFrom: 2)
+        guard size <= theme.emojis.count else { fatalError("number of pairs of cards of \(theme.name) theme exceeds emojis.count") }
         var chosenEmojies = [String]()
         while chosenEmojies.count < size {
-            let emoji = theme.emojies.randomElement()!
+            let emoji = theme.emojis.randomElement()!
             if !chosenEmojies.contains(emoji) {
                 chosenEmojies.append(emoji)
             }
@@ -31,24 +32,37 @@ class EmojiMemoryGame: ObservableObject {
         }
     }
     
-    struct Theme {
+    struct Theme: Codable {
         let name: String
-        let emojies: [String]
-        let color: Color
-        var numberOfPairs: Int?
+        let emojis: [String]
+        var color: Color { Color(themeColor) }
+        let numberOfPairs: Int
+        
+        private let themeColor: UIColor.RGB
+        
+        init(name: String, emojis: [String], color: UIColor, numberOfPairs: Int) {
+            self.name = name
+            self.emojis = emojis
+            self.themeColor = color.rgb
+            self.numberOfPairs = numberOfPairs
+        }
     }
     
     static var themes: [Theme] = [
-        Theme(name: "Holloween", emojies: ["👻", "🎃", "🕷", "😈", "💀"], color: .orange),
-        Theme(name: "Animals", emojies: ["🐼", "🦊", "🐨", "🐶", "🐱"], color: .green, numberOfPairs: 4),
-        Theme(name: "Sports", emojies: ["⚽️", "🏀", "🏈", "⚾️", "🎾", "🏐", "🎳", "🏓"], color: .pink),
-        Theme(name: "Faces", emojies: ["🥶", "😡", "😇", "😂", "🥺", "😃"], color: .purple, numberOfPairs: 5),
-        Theme(name: "Fruits", emojies: ["🍎", "🍐", "🍊", "🍌", "🍉", "🍇", "🍓", "🍍", "🥝"], color: .yellow, numberOfPairs: 6),
-        Theme(name: "Flags", emojies: ["🇨🇴", "🇨🇨", "🇨🇽", "🇨🇳", "🇹🇩", "🇪🇨", "🇹🇫", "🇰🇷", "🇵🇪", "🇺🇸"], color: .blue, numberOfPairs: 3)
+        Theme(name: "Holloween", emojis: ["👻", "🎃", "🕷", "😈", "💀"], color: .orange, numberOfPairs: 3),
+        Theme(name: "Animals", emojis: ["🐼", "🦊", "🐨", "🐶", "🐱"], color: .green, numberOfPairs: 4),
+        Theme(name: "Sports", emojis: ["⚽️", "🏀", "🏈", "⚾️", "🎾", "🏐", "🎳", "🏓"], color: .magenta, numberOfPairs: 6),
+        Theme(name: "Faces", emojis: ["🥶", "😡", "😇", "😂", "🥺", "😃"], color: .purple, numberOfPairs: 6),
+        Theme(name: "Fruits", emojis: ["🍎", "🍐", "🍊", "🍌", "🍉", "🍇", "🍓", "🍍", "🥝"], color: .yellow, numberOfPairs: 9),
+        Theme(name: "Flags", emojis: ["🇨🇴", "🇨🇨", "🇨🇽", "🇨🇳", "🇹🇩", "🇪🇨", "🇹🇫", "🇰🇷", "🇵🇪", "🇺🇸"], color: .blue, numberOfPairs: 10)
     ]
     
     static func randomTheme(from themes: [Theme] = EmojiMemoryGame.themes) -> Theme {
         return themes.randomElement()!
+    }
+    
+    var json: Data? {
+        try? JSONEncoder().encode(self.theme)
     }
 
     // MARK: - Access to the model
@@ -70,14 +84,6 @@ class EmojiMemoryGame: ObservableObject {
     func resetGame() {
         self.theme = EmojiMemoryGame.randomTheme()
         self.model = EmojiMemoryGame.createMemoryGame(with: theme)
-    }
-}
-
-
-
-
-struct EmojiMemoryGame_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+        print(self.json?.utf8 ?? "cannot encode/decode theme")
     }
 }
