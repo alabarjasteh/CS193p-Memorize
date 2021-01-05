@@ -12,8 +12,13 @@ class EmojiMemoryGame: ObservableObject {
     @Published private var model: MemoryGame<String>
     var theme: Theme
     
-    init() {
-        theme = EmojiMemoryGame.randomTheme()
+//    init() {
+//        theme = EmojiMemoryGame.randomTheme()
+//        model = EmojiMemoryGame.createMemoryGame(with: theme)
+//    }
+    
+    init(theme: Theme) {
+        self.theme = theme
         model = EmojiMemoryGame.createMemoryGame(with: theme)
     }
     
@@ -32,19 +37,45 @@ class EmojiMemoryGame: ObservableObject {
         }
     }
     
-    struct Theme: Codable {
-        let name: String
-        let emojis: [String]
-        var color: Color { Color(themeColor) }
-        let numberOfPairs: Int
+    struct Theme: Codable, Hashable, Identifiable {
+        var id: UUID
         
-        private let themeColor: UIColor.RGB
+        static func == (lhs: Theme, rhs: Theme) -> Bool {
+            lhs.id == rhs.id
+        }
         
-        init(name: String, emojis: [String], color: UIColor, numberOfPairs: Int) {
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
+        
+        var name: String
+        var emojis: [String]
+        var color: UIColor {
+            get { UIColor(themeColor) }
+            set { themeColor = newValue.rgb }
+        }
+        var numberOfPairs: Int
+        
+        private var themeColor: UIColor.RGB
+        
+        init(id: UUID? = nil, name: String, emojis: [String], color: UIColor, numberOfPairs: Int) {
+            self.id = id ?? UUID()
             self.name = name
             self.emojis = emojis
             self.themeColor = color.rgb
             self.numberOfPairs = numberOfPairs
+        }
+        
+        var json: Data? {
+            try? JSONEncoder().encode(self)
+        }
+        
+        func emojisToString() -> String {
+            var out = String()
+            for emoji in emojis {
+                out.append(emoji)
+            }
+            return out
         }
     }
     
@@ -59,10 +90,6 @@ class EmojiMemoryGame: ObservableObject {
     
     static func randomTheme(from themes: [Theme] = EmojiMemoryGame.themes) -> Theme {
         return themes.randomElement()!
-    }
-    
-    var json: Data? {
-        try? JSONEncoder().encode(self.theme)
     }
 
     // MARK: - Access to the model
@@ -84,6 +111,6 @@ class EmojiMemoryGame: ObservableObject {
     func resetGame() {
         self.theme = EmojiMemoryGame.randomTheme()
         self.model = EmojiMemoryGame.createMemoryGame(with: theme)
-        print(self.json?.utf8 ?? "cannot encode/decode theme")
+        print(self.theme.json?.utf8 ?? "cannot encode/decode theme")
     }
 }

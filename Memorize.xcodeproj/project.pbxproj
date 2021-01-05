@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61110F4225A1BA9F005F6CC1 /* EmojiMemoryGameStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61110F4125A1BA9F005F6CC1 /* EmojiMemoryGameStore.swift */; };
+		61110F4525A1BFC6005F6CC1 /* EmojiMemeoryGameChooser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61110F4425A1BFC6005F6CC1 /* EmojiMemeoryGameChooser.swift */; };
+		61110F4D25A1C719005F6CC1 /* ThemeChooserRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61110F4C25A1C719005F6CC1 /* ThemeChooserRow.swift */; };
+		61110F5025A1EA74005F6CC1 /* ThemeEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61110F4F25A1EA74005F6CC1 /* ThemeEditor.swift */; };
 		615C19EA25489B2F00B159E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615C19E925489B2F00B159E4 /* AppDelegate.swift */; };
 		615C19EC25489B2F00B159E4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615C19EB25489B2F00B159E4 /* SceneDelegate.swift */; };
 		615C19EE25489B2F00B159E4 /* EmojiMermoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615C19ED25489B2F00B159E4 /* EmojiMermoryGameView.swift */; };
@@ -27,6 +31,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		61110F4125A1BA9F005F6CC1 /* EmojiMemoryGameStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGameStore.swift; sourceTree = "<group>"; };
+		61110F4425A1BFC6005F6CC1 /* EmojiMemeoryGameChooser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemeoryGameChooser.swift; sourceTree = "<group>"; };
+		61110F4C25A1C719005F6CC1 /* ThemeChooserRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChooserRow.swift; sourceTree = "<group>"; };
+		61110F4F25A1EA74005F6CC1 /* ThemeEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEditor.swift; sourceTree = "<group>"; };
 		615C19E625489B2F00B159E4 /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		615C19E925489B2F00B159E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		615C19EB25489B2F00B159E4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -82,6 +90,10 @@
 				619D5AB6256987B8005F04FF /* Array+Only.swift */,
 				61764A70254C32D300E91092 /* MemoryGame.swift */,
 				61764A72254C43A400E91092 /* EmojiMemoryGame.swift */,
+				61110F4125A1BA9F005F6CC1 /* EmojiMemoryGameStore.swift */,
+				61110F4425A1BFC6005F6CC1 /* EmojiMemeoryGameChooser.swift */,
+				61110F4C25A1C719005F6CC1 /* ThemeChooserRow.swift */,
+				61110F4F25A1EA74005F6CC1 /* ThemeEditor.swift */,
 				61D1E76625979CD8004419B8 /* Data2String.swift */,
 				617A4462257A3E0600E66FA7 /* Int+Random.swift */,
 				615C19E925489B2F00B159E4 /* AppDelegate.swift */,
@@ -182,10 +194,14 @@
 				615C19EA25489B2F00B159E4 /* AppDelegate.swift in Sources */,
 				61764A71254C32D300E91092 /* MemoryGame.swift in Sources */,
 				617A4463257A3E0600E66FA7 /* Int+Random.swift in Sources */,
+				61110F4D25A1C719005F6CC1 /* ThemeChooserRow.swift in Sources */,
 				615C19EC25489B2F00B159E4 /* SceneDelegate.swift in Sources */,
 				619D5AB7256987B8005F04FF /* Array+Only.swift in Sources */,
+				61110F4225A1BA9F005F6CC1 /* EmojiMemoryGameStore.swift in Sources */,
 				61D1E76725979CD8004419B8 /* Data2String.swift in Sources */,
+				61110F4525A1BFC6005F6CC1 /* EmojiMemeoryGameChooser.swift in Sources */,
 				615C19EE25489B2F00B159E4 /* EmojiMermoryGameView.swift in Sources */,
+				61110F5025A1EA74005F6CC1 /* ThemeEditor.swift in Sources */,
 				61D1E76425976B3E004419B8 /* UIColor+RGBA.swift in Sources */,
 				616496BA257B916A00F1CD49 /* Cardify.swift in Sources */,
 				61764A73254C43A400E91092 /* EmojiMemoryGame.swift in Sources */,

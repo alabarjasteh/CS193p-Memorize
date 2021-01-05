@@ -13,8 +13,8 @@ struct EmojiMermoryGameView: View {
     
     var body: some View {
         VStack {
-            Text(viewModel.theme.name)
-                .font(.largeTitle)
+//            Text(viewModel.theme.name)
+//                .font(.largeTitle)
             
             Grid(viewModel.cards) { card in
                 CardView(card: card, ThemeColor: viewModel.theme.color).onTapGesture {
@@ -37,13 +37,13 @@ struct EmojiMermoryGameView: View {
             Text(String(viewModel.score))
                 .font(.title)
         }
-        .foregroundColor(viewModel.theme.color)
+        .foregroundColor(Color(viewModel.theme.color))
     }
 }
 
 struct CardView: View {
     var card: MemoryGame<String>.Card
-    var ThemeColor: Color
+    var ThemeColor: UIColor
     
     //    var body: some View {
     //        GeometryReader { geometry in
@@ -110,10 +110,10 @@ struct CardView: View {
 
 
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        let game = EmojiMemoryGame()
-        game.choose(card: game.cards[0])
-        return EmojiMermoryGameView(viewModel: game)
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let game = EmojiMemoryGame()
+//        game.choose(card: game.cards[0])
+//        return EmojiMermoryGameView(viewModel: game)
+//    }
+//}
